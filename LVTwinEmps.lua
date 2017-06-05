@@ -43,9 +43,16 @@ LVBM.AddOns.TwinEmps = {
 		LVBM.Schedule(25 - delay, "LVBM.AddOns.TwinEmps.OnEvent", "TeleportWarning", 5);
 	end,
 	["OnEvent"] = function(event, arg1)	
-		if ( event == "CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS" and string.find(arg1, LVBM_TWINEMPS_EXPLODE_EXPR) ) then
-			if LVBM.AddOns.TwinEmps.Options.BugExplode then
+		if event == "CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS" then
+			if string.find(arg1, LVBM_TWINEMPS_EXPLODE_EXPR) and LVBM.AddOns.TwinEmps.Options.BugExplode then
 				LVBM.AddSpecialWarning(LVBM_TWINEMPS_EXPLODE_ANNOUNCE);
+			end
+			if (arg1 == LVBM_TWINEMPS_GAIN_SPELL_1) or (arg1 == LVBM_TWINEMPS_GAIN_SPELL_2) then
+				LVBM.Announce(LVBM_TWINEMPS_TELEPORT_ANNOUNCE);
+				LVBM.EndStatusBarTimer("Teleport");
+				LVBM.StartStatusBarTimer(30, "Teleport");
+				LVBM.Schedule(20, "LVBM.AddOns.TwinEmps.OnEvent", "TeleportWarning", 10);
+				LVBM.Schedule(25, "LVBM.AddOns.TwinEmps.OnEvent", "TeleportWarning", 5);
 			end
 		elseif event == "CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE" then -- mob casts a spell
 			if (arg1 == LVBM_TWINEMPS_CAST_SPELL_1) or (arg1 == LVBM_TWINEMPS_CAST_SPELL_2) then

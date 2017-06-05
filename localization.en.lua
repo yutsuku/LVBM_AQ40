@@ -87,6 +87,8 @@ LVBM_TWINEMPS_TELEPORT_ANNOUNCE		= "*** Teleport ***";
 
 LVBM_TWINEMPS_CAST_SPELL_1		= "Emperor Vek'lor casts Twin Teleport.";
 LVBM_TWINEMPS_CAST_SPELL_2		= "Emperor Vek'nilash casts Twin Teleport.";
+LVBM_TWINEMPS_GAIN_SPELL_1		= "Emperor Vek'lor gains Twin Teleport."; -- Kronos
+LVBM_TWINEMPS_GAIN_SPELL_2		= "Emperor Vek'nilash gains Twin Teleport."; -- Kronos
 LVBM_TWINEMPS_VEKNILASH			= "Emperor Vek'nilash";
 LVBM_TWINEMPS_VEKLOR			= "Emperor Vek'lor";
 
