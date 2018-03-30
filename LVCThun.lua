@@ -83,15 +83,15 @@ LVBM.AddOns.CThun = {
 	end,
 	["OnCombatStart"] = function(delay)		
 		LVBM.AddOns.CThun.Phase2 = false;
-		LVBM.Schedule(37 + 7.5 - delay, "LVBM.AddOns.CThun.OnEvent", "DarkGlareWarning", 5);
-		LVBM.Schedule(42 + 7.5 - delay, "LVBM.AddOns.CThun.OnEvent", "DarkGlareWarning", 0);
-		LVBM.Schedule(32 + 7.5 - delay, "LVBM.AddOns.CThun.OnEvent", "SmallEyeWarning", 5);
-		LVBM.Schedule(37 + 7.5 - delay, "LVBM.AddOns.CThun.OnEvent", "SmallEyeWarning", 0);
+		LVBM.Schedule(46 - delay, "LVBM.AddOns.CThun.OnEvent", "DarkGlareWarning", 5);
+		LVBM.Schedule(51 - delay, "LVBM.AddOns.CThun.OnEvent", "DarkGlareWarning", 0);
+		LVBM.Schedule(40 - delay, "LVBM.AddOns.CThun.OnEvent", "SmallEyeWarning", 5);
+		LVBM.Schedule(45 - delay, "LVBM.AddOns.CThun.OnEvent", "SmallEyeWarning", 0);
 		if (not LVBM.GetStatusBarTimerTimeLeft("Dark Glare")) and LVBM.AddOns.CThun.Options.Announce then --synced timer is better!
-			LVBM.StartStatusBarTimer(48 + 7.5 - delay, "Dark Glare")
+			LVBM.StartStatusBarTimer(50 - delay, "Dark Glare")
 		end
 		if (not LVBM.GetStatusBarTimerTimeLeft("Eye Tentacles")) and LVBM.AddOns.CThun.Options.Announce then
-			LVBM.StartStatusBarTimer(43 + 7.5 - delay, "Eye Tentacles")
+			LVBM.StartStatusBarTimer(45 - delay, "Eye Tentacles")
 		end
 		if LVBM.AddOns.CThun.Options.RangeCheck then
 			LVBM_Gui_DistanceFrame_Show();
@@ -173,17 +173,18 @@ LVBM.AddOns.CThun = {
 					end	
 				end
 			end
-			LVBM.Schedule(4, "LVBM.AddOns.CThun.OnEvent", "GetDarkGlareDuration");
+			LVBM.Schedule(7, "LVBM.AddOns.CThun.OnEvent", "GetDarkGlareDuration");
 
 		elseif (event == "GetDarkGlareDuration") then
-			local delta = - GetTime() + LVBM.AddOns.CThun.LastTargetChange + 6.66; --timers by Mukka (AddOn: AQ_BossMod) - thx for this great idea to announce the targeted group :)
+			local delta = -GetTime() + LVBM.AddOns.CThun.LastTargetChange
 			if (delta < -1.5) or (delta > 1.8) then
 				delta = 0;
 				if LVBM.AddOns.CThun.Options.Announce then
 					LVBM.AddMsg(LVBM_CTHUN_DARK_GLARE_TIMER_FAILED);
 				end
 			end
-			local glareEnd = 38 - 4 + delta + 3; -- +3 adjustment by me...Mukka's timers did not work 100% correct..."dark glare end" must be 3 seconds longer (and "dark glare" bar was 3 seconds too long --> wasn't a big problem)
+			--local glareEnd = 38 - 4 + delta + 3; -- +3 adjustment by me...Mukka's timers did not work 100% correct..."dark glare end" must be 3 seconds longer (and "dark glare" bar was 3 seconds too long --> wasn't a big problem)
+			local glareEnd = 36 + delta
 			LVBM.Schedule((glareEnd - 5), "LVBM.AddOns.CThun.OnEvent", "DarkGlareEndWarning", 5);
 			LVBM.Schedule(glareEnd, "LVBM.AddOns.CThun.OnEvent", "DarkGlareEndWarning", 0);
 			if (not LVBM.GetStatusBarTimerTimeLeft("Dark Glare End")) and LVBM.AddOns.CThun.Options.Announce then
@@ -220,7 +221,16 @@ LVBM.AddOns.CThun = {
 			LVBM.AddOns.CThun.NextSpawn = LVBM_CTHUN_CLAW;
 			LVBM.Announce(LVBM_CTHUN_GIANT_CLAW_WARNING);
 			LVBM.Schedule(10, "LVBM.AddOns.CThun.OnEvent", "GiantTentacleSpawn", 0);
-			LVBM.StartStatusBarTimer(10, "Giant Claw Tentacle");
+			LVBM.StartStatusBarTimer(9, "Giant Claw Tentacle");
+		elseif (event == "WeakenedEnd") then
+			if arg1 == 10 then
+				LVBM.AddOns.CThun.NextSpawn = LVBM_CTHUN_CLAW;
+				LVBM.Announce(LVBM_CTHUN_GIANT_CLAW_WARNING);
+				LVBM.Schedule(10, "LVBM.AddOns.CThun.OnEvent", "GiantTentacleSpawn", 0);
+				LVBM.StartStatusBarTimer(9, "Giant Claw Tentacle");
+			elseif arg1 == 0 then
+			
+			end
 		elseif (event == "GiantTentacleSpawn") then
 			LVBM.AddOns.CThun.InCombat = true;
 			if arg1 == 10 then
@@ -228,10 +238,10 @@ LVBM.AddOns.CThun = {
 			elseif arg1 == 0 then
 				if LVBM.AddOns.CThun.NextSpawn == LVBM_CTHUN_CLAW then
 					LVBM.AddOns.CThun.NextSpawn = LVBM_CTHUN_EYE;
-					LVBM.StartStatusBarTimer(30, "Giant Eye Tentacle");
+					LVBM.StartStatusBarTimer(28, "Giant Eye Tentacle");
 				elseif LVBM.AddOns.CThun.NextSpawn == LVBM_CTHUN_EYE then
 					LVBM.AddOns.CThun.NextSpawn = LVBM_CTHUN_CLAW;
-					LVBM.StartStatusBarTimer(30, "Giant Claw Tentacle");
+					LVBM.StartStatusBarTimer(28, "Giant Claw Tentacle");
 				end
 				LVBM.Schedule(20, "LVBM.AddOns.CThun.OnEvent", "GiantTentacleSpawn", 10);
 				LVBM.Schedule(30, "LVBM.AddOns.CThun.OnEvent", "GiantTentacleSpawn", 0);
@@ -248,7 +258,8 @@ LVBM.AddOns.CThun = {
 				LVBM.Announce(LVBM_CTHUN_WEAKENED_WARNING);
 				LVBM.Schedule(20, "LVBM.AddOns.CThun.OnEvent", "WeakenedWarning", 25);
 				LVBM.Schedule(35, "LVBM.AddOns.CThun.OnEvent", "WeakenedWarning", 10);
-				LVBM.Schedule(45, "LVBM.AddOns.CThun.OnEvent", "Phase2OrWeakenedEnd", 0);
+				LVBM.Schedule(35, "LVBM.AddOns.CThun.OnEvent", "WeakenedEnd", 10);
+				LVBM.Schedule(45, "LVBM.AddOns.CThun.OnEvent", "WeakenedEnd", 0);
 				LVBM.StartStatusBarTimer(45, "Weakened");
 			end
 		elseif (event == "WeakenedWarning") then

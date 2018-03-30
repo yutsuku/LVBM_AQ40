@@ -73,6 +73,14 @@ LVBM_DEFENDER_GAIN_EXPLODE		= "Anubisath Defender gains Explode.";
 LVBM_DEFENDER_PLAGUE_REGEXP		= "([^%s]+) (%w+) afflicted by Plague.";
 
 
+-- Anubisat Warders
+LVBM_WARDER_NAME			= "Anubisath Warders";
+LVBM_WARDER_DESCRIPTION		= "Announces Dust Cloud, Roots, Fear and Silence.";
+LVBM_WARDER_CLOUD_DUST		= "Anubisath Warder begins to perform Dust Cloud.";
+LVBM_WARDER_FEAR			= "Anubisath Warder begins to cast Fear.";
+LVBM_WARDER_ROOTS			= "Anubisath Warder begins to cast Entangling Roots.";
+LVBM_WARDER_SILENCE			= "Anubisath Warder begins to cast Silence.";
+
 
 -- 6. Twin Emperors
 LVBM_TWINEMPS_NAME			= "Twin Emperors";
@@ -113,7 +121,12 @@ LVBM_OURO_SUBMERGE_WARNING		= "*** %s seconds until Ouro submerges ***";
 LVBM_OURO_CAST_SWEEP			= "Ouro begins to cast Sweep.";
 LVBM_OURO_CAST_SAND_BLAST		= "Ouro begins to perform Sand Blast.";
 LVBM_OURO_DIRT_MOUND_QUAKE		= "Dirt Mound's Quake";
+LVBM_OURO_DIRT_MOUND_QUAKE_TARGET1 = "Dirt Mound's Quake hits (.-) for";
+LVBM_OURO_DIRT_MOUND_QUAKE_TARGET2 = "Dirt Mound's Quake is absorbed by (.-)";
+LVBM_OURO_DIRT_MOUND_QUAKE_TARGET3 = "Dirt Mound's Quake was resisted by (.-)";
+LVBM_OURO_DIRT_MOUND_ANNOUNCE = "*** Dirt Mound on %s ***";
 LVBM_OURO_ENRAGE			= "%s goes into a berserker rage!";
+LVBM_OURO_BERSERK			= "Ouro gains Berserk.";
 LVBM_OURO_ENRAGE_ANNOUNCE		= "*** Enrage ***";
 LVBM_OURO_OURO				= "Ouro";
 

@@ -16,6 +16,7 @@ LVFankriss.lua
 LVViscidus.lua
 LVHuhuran.lua
 LVDefender.lua
+LVWarder.lua
 LVTwinEmps.lua
 LVCThun.lua
 LVOuro.lua
